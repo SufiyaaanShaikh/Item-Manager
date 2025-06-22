@@ -49,17 +49,14 @@ const sendEmail = (e) => {
   ).then(
     (response) => {
       console.log("SUCCESS!", response.status, response.text);
-      alert("Email sent!");
+       toast.success("Enquiry sent successfully");
     },
     (err) => {
       console.error("FAILED...", err);
-      alert("Email failed!");
+       toast.error("Enquiry sent successfully");
     }
   );
 };
-
-
-
 
   const formatType = (type) => {
     const typeMap = {
