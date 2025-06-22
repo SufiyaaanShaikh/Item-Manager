@@ -23,4 +23,4 @@ A modern React-based frontend for an item management system with features to vie
 ## Installation
 1. Clone the repository
    ```bash
-   git clone [repository-url]
+   git clone https://github.com/SufiyaaanShaikh/Item-Manager.git
