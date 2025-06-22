@@ -1,10 +1,12 @@
+import emailjs from "@emailjs/browser";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FiArrowLeft, FiMail, FiTag, FiInfo } from "react-icons/fi";
 import { toast } from "react-hot-toast";
+import { motion } from 'framer-motion';
 import { getItemById } from "../utils/api";
+import { FiArrowLeft, FiInfo, FiMail, FiTag } from "react-icons/fi";
 import ImageCarousel from "../components/ImageCarousel";
+
 
 const ItemDetail = () => {
   const { id } = useParams();
@@ -29,6 +31,35 @@ const ItemDetail = () => {
   const handleEnquire = () => {
     toast.success("Enquiry sent successfully");
   };
+
+
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  emailjs.send(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    {
+      title: "Product Enquiry",
+      name: "Sufiyan Shaikh",
+      email: "sufiyanshaikh@gmail.com",
+      message: "Hi, I want to enquire about your services.",
+    },
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+  ).then(
+    (response) => {
+      console.log("SUCCESS!", response.status, response.text);
+      alert("Email sent!");
+    },
+    (err) => {
+      console.error("FAILED...", err);
+      alert("Email failed!");
+    }
+  );
+};
+
+
+
 
   const formatType = (type) => {
     const typeMap = {
@@ -126,7 +157,7 @@ const ItemDetail = () => {
 
             <div className="mt-8 pt-6 border-t border-gray-200">
               <button
-                onClick={handleEnquire}
+                onClick={sendEmail}
                 type="button"
                 className="w-full cursor-pointer lg:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
